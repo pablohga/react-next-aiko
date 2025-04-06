@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Oxanium } from "next/font/google";
 import "./globals.css";
+import React from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const oxanium = Oxanium({
+  variable: "--font-oxanium",
+  subsets: ["latin"],
+  weight: ["400", "700"], // Normal e Bold
 });
 
 export const metadata: Metadata = {
@@ -24,10 +31,42 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} ${oxanium.variable} antialiased bg-gray-100`}>
+        {/* Container Principal */}
+        <div className="flex flex-col h-screen">
+          
+          {/* Topbar */}
+          <header className="bg-gray-900 text-white p-4 text-center font-oxanium text-xl">
+            Meu Topo
+          </header>
+
+          {/* Layout principal com Sidebar e Conteúdo */}
+          <div className="flex flex-1">
+            
+            {/* Sidebar */}
+            <aside className="bg-gray-800 text-white w-64 p-4">
+              <nav>
+                <ul className="space-y-2">
+                  <li><a href="#" className="block p-2 hover:bg-gray-700">Item 1</a></li>
+                  <li><a href="#" className="block p-2 hover:bg-gray-700">Item 2</a></li>
+                  <li><a href="#" className="block p-2 hover:bg-gray-700">Item 3</a></li>
+                </ul>
+              </nav>
+            </aside>
+
+            {/* Conteúdo */}
+            <main className="flex-1 bg-white p-6 text-gray-900 font-arial">
+              {children}
+            </main>
+
+          </div>
+
+          {/* Footer */}
+          <footer className="bg-gray-900 text-white p-4 text-center">
+            Meu Rodapé
+          </footer>
+
+        </div>
       </body>
     </html>
   );

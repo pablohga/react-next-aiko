@@ -1,10 +1,16 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
+'use client';
+
+import React from "react";
 import 'leaflet/dist/leaflet.css';
 import './styles.css';
-
+import dynamic from "next/dynamic";
 function SimpleMap() {
-  const position = [51.505, -0.09];
+  const position: [number, number] = [51.505, -0.09];
 
+  // Importa o MapContainer dinamicamente, desativando SSR
+  const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapContainer), { ssr: false });
+  const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
+  
   return (
     <MapContainer
       center={position}
